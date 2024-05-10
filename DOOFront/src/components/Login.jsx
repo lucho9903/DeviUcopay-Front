@@ -67,17 +67,18 @@ const Login = () => {
                                 <input type="password" placeholder="Ingrese pin" className="cajatexto" id="password" name="password" required />
                                 <button className="btnform">{registrando ? "Registrate" : "Inicia Sesión"}</button>
                             </form>
-                            <h4>{registrando ? "Si ya tienes cuenta" : "No tienes cuenta"}</h4>
-                            <button onClick={toggleMostrarRegistro} className="btnswicht">
-                                {mostrarRegistro ? "Cerrar Registro" : "Registrate"}
+                            <h6>{registrando ? "Si ya tienes cuenta" : "¿No tienes cuenta?"}</h6>
+                            <button onClick={toggleMostrarRegistro} className="btnswicht2">
+                                {mostrarRegistro ? "Cancelar Registro" : "Registrate"}
                             </button>
                             {mostrarRegistro && (
                                 <form onSubmit={handleSubmitRegistro}>
-                                    <input type="email" placeholder="Correo" name="email" required />
-                                    <input type="password" placeholder="Contraseña" name="password" required />
-                                    <input type="text" placeholder="Número de Identificación" name="identificacion" required />
-                                    <input type="text" placeholder="Número de Cuenta" name="cuenta" required />
-                                    <button type="submit">Registrarse</button>
+                                    <h1></h1>
+                                    <input type="email" placeholder="Correo" className="cajatexto" name="email" required />
+                                    <input type="password" placeholder="Contraseña" className="cajatexto" name="password" required />
+                                    <input type="text" placeholder="Número de Identificación" className="cajatexto" name="identificacion" required />
+                                    <input type="text" placeholder="Número de Cuenta" className="cajatexto" name="cuenta" required />
+                                    <button className="btnform" type="submit">Registrarse</button>
                                 </form>
                             )}
                         </div>
