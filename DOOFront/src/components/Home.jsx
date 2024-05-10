@@ -1,19 +1,20 @@
 import React from "react";
-import appFirebase from '../credenciales';
 import { getAuth, signOut } from 'firebase/auth';
 import Imagen from '../assets/loginvector.png';
 import Imageprofile from '../assets/logo.png';
+import appFirebase from '../credenciales';
+
 const auth = getAuth(appFirebase);
 
-const Home = ({ correoUsuario }) => {
+const Home = ({ correoUsuario, numeroCuenta }) => {
     const [saldo, setSaldo] = React.useState(0);
 
     React.useEffect(() => {
         setSaldo(0);
-    }, [correoUsuario]);
+    }, []);
 
     return (
-        <div constyle={{
+        <div style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -38,30 +39,30 @@ const Home = ({ correoUsuario }) => {
                         }}>
                             Bienvenido usuario: {correoUsuario}
                         </div>
-                        
-                    </div>
-
-                    <div style={{ display: 'inline-block', marginRight: '20px' }}>
-                        <h3 style={{
-                            fontSize: '24px',
+                        <div style={{
+                            fontSize: '25px',
                             color: 'black',
                             fontFamily: 'Arial, Helvetica, sans-serif',
                             margin: '15px, 0',
                             fontWeight: 'bold',
-                        }}>Número de cuenta: 02485737636</h3>
-                        <h3 style={{
-                            fontSize: '24px',
+                        }}>
+                            Número de cuenta: {numeroCuenta}
+                        </div>
+                        <div style={{
+                            fontSize: '25px',
                             color: 'black',
                             fontFamily: 'Arial, Helvetica, sans-serif',
                             margin: '15px, 0',
                             fontWeight: 'bold',
-                        }}>Saldo: $0.00</h3>
+                        }}>
+                            Saldo: ${saldo}
+                        </div>
                     </div>
 
                     <button style={{
                         backgroundColor: '#09600a'  ,
                         borderColor: 'slategray',
-                        borderCadius: '30px',
+                        borderRadius: '30px',
                         width: '100%',
                         padding: '15px',
                         borderWidth: '0px',
