@@ -8,35 +8,50 @@ const auth = getAuth(appFirebase)
 
 const Login = () => {
 
-    const [regitrando, setRegistrando] = useState(false)
+    const [registrando, setRegistrando] = useState(false)
+
+    const functAutenticacion = async(e) =>{
+        e.preventDefault();
+        const correo = e.target.email.value;
+        const contraseña = e.target.password.value;
+        // Agregar lógica de autenticación aquí
+        console.log(correo);
+        if(registrando){
+            try {
+                await createUserWithEmailAndPassword(auth, correo, contraseña)
+            } catch (error) {
+                alert("Asegurese que la contraseña tenga 6 caracteres")
+                
+            }
+        }
+        else{
+            await signInWithEmailAndPassword(auth, correo, contraseña)
+        }
+    }
+
     return(
         <div className="container">
             <div className="row">
-                {/*columna mas peuqeña*/}
+                {/*columna mas pequeña*/}
                 <div className="col-md-4">
                     <div className="padre">
                         <div className="card card-body shadow-lg " >
                             <img src={Imageprofile} alt="" className="estilo-porfile"/>
-                            <form >
-                                <input type="text" placeholder="Ingresar usuario" className="cajatexto" />
-                                <input type="pasword" placeholder="Ingrese pin" className="cajatexto" />
-                                <button className="btnform">{regitrando ? "Rgistrate ": "Inicia Sesion"}</button>
-
+                            <form onSubmit={functAutenticacion} >
+                                <input type="text" placeholder="Ingresar usuario" className="cajatexto" id="email"/>
+                                <input type="password" placeholder="Ingrese pin" className="cajatexto" id="password" />
+                                <button className="btnform">{registrando ? "Registrate" : "Inicia Sesion"}</button>
                             </form>
-                            <h4>No tienes cuenta:  <button className="btnswicht">Registrate</button></h4>
+                            <h4>{registrando ?"si ya tienes cuenta":   "No tienes cuenta" }  <button onClick={()=> setRegistrando(!registrando)} className="btnswicht">{registrando ? "inicia sesion":"registrate"}</button></h4>
                         </div>
-
                     </div>
                 </div>
                 {/*columna mas grande*/}
                 <div className="col-md-8">
                     <img src={Imagen} alt="" className="tamaño-imagen2"/>
-                
                 </div>
-
-            </div>            
+            </div>
         </div>
     )
 }
 export default Login
-
