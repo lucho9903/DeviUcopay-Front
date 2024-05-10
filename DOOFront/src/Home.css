@@ -1,0 +1,68 @@
+/* Estilos generales para el contenedor */
+.container {
+    display: flex; /* Disposición para filas o columnas */
+    flex-direction: column; /* Organiza los elementos verticalmente por defecto */
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos verticalmente */
+    width: 100%; /* Toma el ancho completo del visor */
+    padding: 20px; /* Añade margen alrededor del contenido */
+  }
+  
+  /* Estilos para la fila del encabezado */
+  .row {
+    display: flex; /* Disposición para filas o columnas */
+    flex-direction: row; /* Organiza los elementos horizontalmente */
+    width: 100%; /* Ancho completo de la fila */
+    margin-bottom: 20px; /* Añade espacio entre filas */
+  }
+  
+  /* Estilos para las columnas dentro de una fila */
+  .col-md-6 {
+    flex: 1 0 50%; /* Ancho igual para las columnas */
+    padding: 10px; /* Añade margen alrededor del contenido de la columna */
+  }
+  
+  /* Estilos para la imagen de inicio de sesión */
+  .img-fluid {
+    max-width: 100%; /* La imagen se escala para adaptarse al ancho del contenedor */
+    height: auto; /* Mantiene la relación de aspecto */
+  }
+  
+  /* Estilos para el área de texto */
+  .text-center {
+    text-align: center; /* Centra el texto horizontalmente */
+  }
+  
+  /* Estilos para los títulos */
+  .text {
+    font-size: 18px; /* Ajusta el tamaño de fuente según sea necesario */
+    margin-bottom: 10px; /* Añade espacio entre los títulos */
+  }
+  
+  /* Estilos para el número de cuenta y saldo */
+  .account-number, .saldo {
+    font-size: 16px; /* Ajusta el tamaño de fuente según sea necesario */
+  }
+  
+  /* Estilos para el botón de cierre de sesión */
+  .btn {
+    padding: 10px 20px; /* Ajusta el margen como sea necesario */
+    border: none; /* Elimina el borde predeterminado del botón */
+    border-radius: 5px; /* Añade esquinas redondeadas */
+    cursor: pointer; /* Indica botón con capacidad de hacer clic */
+  }
+  
+  .btn-primary {
+    background-color: #007bff; /* Fondo azul para el botón principal */
+    color: #fff; /* Color del texto blanco */
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+  }
+  
+  /* Estilos para la imagen de perfil */
+  .profile-image {
+    border-radius: 50%; /* Crea una imagen de perfil circular */
+  }
+  

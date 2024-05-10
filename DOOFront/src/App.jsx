@@ -9,6 +9,7 @@ const auth = getAuth(appFirebase);
 import Login from './components/Login.jsx';
 import Home from './components/Home.jsx';
 import './App.css';
+import './Home.css';
 
 function App() {
   const [usuario, setUsuario] = useState(null);
