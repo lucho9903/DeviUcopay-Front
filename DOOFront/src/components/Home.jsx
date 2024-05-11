@@ -70,7 +70,7 @@ const Home = ({ correoUsuario, numeroCuenta }) => {
                         color: 'white',
 
                     }}
-                    className="btn btn-primary" onClick={() => signOut(auth)}>Logout</button>
+                    className="btn btn-primary" onClick={() => signOut(auth)}>Cerrar sesion</button>
                 </div>
                 <div className="col-md-8 ">
                     <div className="row">

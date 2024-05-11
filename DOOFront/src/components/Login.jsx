@@ -11,9 +11,26 @@ const auth = getAuth(appFirebase);
 const Login = () => {
     const [registrando, setRegistrando] = useState(false);
     const [mostrarRegistro, setMostrarRegistro] = useState(false);
+    const [tipoIdentificacionSeleccionado, setTipoIdentificacionSeleccionado] = useState("");
+    const [tipoCuentaSeleccionado, setTipoCuentaSeleccionado] = useState("");
+    const [formState, setFormState] = useState({
+        email: '',
+        password: '',
+        tidentificacion: '',
+        identificacion: '',
+        tcuenta: '',
+        cuenta: ''
+    });
 
     const toggleMostrarRegistro = () => {
         setMostrarRegistro(!mostrarRegistro);
+    };
+
+    const handleInputChange = (e) => {
+        setFormState({
+            ...formState,
+            [e.target.name]: e.target.value
+        });
     };
 
     const functAutenticacion = async (e) => {
@@ -34,17 +51,15 @@ const Login = () => {
 
     const handleSubmitRegistro = async (e) => {
         e.preventDefault();
-        const correo = e.target[0].value;
-        const contraseña = e.target[1].value;
-        const identificacion = e.target[2].value;
-        const cuenta = e.target[3].value;
 
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, correo, contraseña);
+            const userCredential = await createUserWithEmailAndPassword(auth, formState.email, formState.password);
             const user = userCredential.user;
             await db.collection('usuarios').doc(user.uid).set({
-                identificacion,
-                cuenta,
+                tidentificacion: formState.tidentificacion,
+                identificacion: formState.identificacion,
+                tcuenta: formState.tcuenta,
+                cuenta: formState.cuenta,
                 email: user.email,
                 createdAt: new Date(),
             });
@@ -54,17 +69,19 @@ const Login = () => {
         }
     };
 
+    const tiposIdentificacion = ["Cédula de ciudadanía", "Cédula de extranjería", "Pasaporte"];
+    const tiposCuenta = ["Usuario", "vendedor", "Administrador"];
+
     return (
         <div className="container">
             <div className="row">
-                {/* Columna más pequeña */}
                 <div className="col-md-4">
                     <div className="padre">
                         <div className="card card-body shadow-lg ">
                             <img src={Imageprofile} alt="" className="estilo-porfile" />
                             <form onSubmit={functAutenticacion}>
-                                <input type="email" placeholder="Ingresar usuario" className="cajatexto" id="email" name="email" required />
-                                <input type="password" placeholder="Ingrese pin" className="cajatexto" id="password" name="password" required />
+                                <input type="email" placeholder="Ingresar usuario" className="cajatexto" id="email" name="email" required onChange={handleInputChange} value={formState.email} />
+                                <input type="password" placeholder="Ingrese pin" className="cajatexto" id="password" name="password" required onChange={handleInputChange} value={formState.password} />
                                 <button className="btnform">{registrando ? "Registrate" : "Inicia Sesión"}</button>
                             </form>
                             <h6>{registrando ? "Si ya tienes cuenta" : "¿No tienes cuenta?"}</h6>
@@ -74,17 +91,28 @@ const Login = () => {
                             {mostrarRegistro && (
                                 <form onSubmit={handleSubmitRegistro}>
                                     <h1></h1>
-                                    <input type="email" placeholder="Correo" className="cajatexto" name="email" required />
-                                    <input type="password" placeholder="Contraseña" className="cajatexto" name="password" required />
-                                    <input type="text" placeholder="Número de Identificación" className="cajatexto" name="identificacion" required />
-                                    <input type="text" placeholder="Número de Cuenta" className="cajatexto" name="cuenta" required />
-                                    <button className="btnform" type="submit">Registrarse</button>
+                                    <input type="email" placeholder="Correo" className="cajatexto" id="email" name="email" required onChange={handleInputChange} value={formState.email} />
+                                    <input type="password" placeholder="Contraseña" className="cajatexto" id="password" name="password" required onChange={handleInputChange} value={formState.password} />
+                                    <select className="cajatexto" id="tidentificacion" name="tidentificacion" value={formState.tidentificacion} onChange={handleInputChange} required>
+                                        <option value="">Tipo de identificación</option>
+                                        {tiposIdentificacion.map((tipo, index) => (
+                                            <option key={index} value={tipo}>{tipo}</option>
+                                        ))}
+                                    </select>
+                                    <input type="text" placeholder="Número de Identificación" className="cajatexto" id="identificacion" name="identificacion" value={formState.identificacion} onChange={handleInputChange} required />
+                                    <select className="cajatexto" id="tcuenta" name="tcuenta" value={formState.tcuenta} onChange={handleInputChange} required>
+                                        <option value="">Tipo de cuenta</option>
+                                        {tiposCuenta.map((tipo, index) => (
+                                            <option key={index} value={tipo}>{tipo}</option>
+                                        ))}
+                                    </select>
+                                    <input type="text" placeholder="Nombre de usuario" className="cajatexto" id="cuenta" name="cuenta" value={formState.cuenta} onChange={handleInputChange} required />
+                                    <button className="btnform">Registrar</button>
                                 </form>
                             )}
                         </div>
                     </div>
                 </div>
-                {/* Columna más grande */}
                 <div className="col-md-8">
                     <img src={Imagen} alt="" className="tamaño-imagen2" />
                 </div>
